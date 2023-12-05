@@ -1,7 +1,7 @@
 document.getElementById("fetchButton").addEventListener("click", fetchData);
 
 function fetchData() {
-    const jsonUrl = "../data.json";
+    const jsonUrl = "https://raw.githubusercontent.com/T0ny-X/simple-fetch/master/data.json";
 
     fetch(jsonUrl)
         .then(response => {
@@ -18,38 +18,41 @@ function fetchData() {
         });
 }
 
-function displayData(data) {
-    const dataContainer = document.getElementById("dataContainer");
+function displayData(data, container = document.getElementById("dataContainer")) {
+    // Check data structure
+    if (typeof data === 'object' && data !== null) {
+        // Handle arrays
+        if (Array.isArray(data)) {
+            const listContainer = document.createElement('ul');
+            container.appendChild(listContainer);
 
-    let table = document.createElement('table');
-
-    let dataHeader = Object.keys(data[0]);
-    let thead = document.createElement('thead');
-    let headerRow = document.createElement('tr');
-
-    dataHeader.forEach((key) => {
-        let headerCell = document.createElement('th');
-        headerCell.textContent = key;
-        headerRow.appendChild(headerCell);
-    });
-
-    thead.appendChild(headerRow);
-    table.appendChild(thead);
-
-    let tbody = document.createElement('tbody');
-
-    data.forEach((object) => {
-        let row = document.createElement('tr');
-        dataHeader.forEach((key) => {
-            let cell = document.createElement('td');
-            cell.textContent = object[key];
-            row.appendChild(cell);
-        });
-        tbody.appendChild(row);
-    });
-
-    table.appendChild(tbody);
-
-    // Append the table to the container
-    dataContainer.appendChild(table);
+            for (const item of data) {
+                const listItem = document.createElement('li');
+                listContainer.appendChild(listItem);
+                displayData(item, listItem);
+            }
+        } else {
+            // Handle objects
+            for (const key in data) {
+                // Check if the value is presentable
+                if (typeof data[key] === 'string' || typeof data[key] === 'number') {
+                    const element = document.createElement('p');
+                    element.textContent = `${key}: ${data[key]}`;
+                    container.appendChild(element);
+                }
+                else if (Array.isArray(data[key]) || typeof data[key] === 'object') {
+                    // Handle nested
+                    const nestedContainer = document.createElement('div');
+                    container.appendChild(nestedContainer);
+                    displayData(data[key], nestedContainer);
+                }
+            }
+        }
+    } else {
+        // Single value
+        const element = document.createElement('p');
+        element.textContent = String(data);
+        container.appendChild(element);
+    }
 }
+
