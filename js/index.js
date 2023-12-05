@@ -1,4 +1,6 @@
 document.getElementById("fetchButton").addEventListener("click", fetchData);
+document.getElementById("clearButton").addEventListener("click", clearData);
+
 
 function fetchData() {
     const jsonUrl = "https://raw.githubusercontent.com/T0ny-X/simple-fetch/master/data.json";
@@ -14,7 +16,7 @@ function fetchData() {
             displayData(data);
         })
         .catch(error => {
-            console.error("Error during fetch:", error);
+            displayError(error.message);
         });
 }
 
@@ -56,3 +58,14 @@ function displayData(data, container = document.getElementById("dataContainer"))
     }
 }
 
+function displayError(errorMessage, container = document.getElementById("dataContainer")) {
+    const errorElement = document.createElement('p');
+    errorElement.style.color = 'red';
+    errorElement.textContent = `Error: ${errorMessage}`;
+    container.appendChild(errorElement);
+}
+
+function clearData(container = document.getElementById("dataContainer")) {
+    // Clear the data container
+    container.innerHTML = '';
+}
