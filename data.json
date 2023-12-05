@@ -1,0 +1,35 @@
+{
+  "education_data": {
+    "Bachelor of Science": {
+      "School": "The Pennsylvania State University, University Park, PA",
+      "Major": "Computer Science",
+      "Type": "BS",
+      "YearConferred": "May 2023",
+      "Cumulative GPA": "3.6/4.0",
+      "Courses": [
+        "Introduction to Computer Science",
+        "Data Structures and Algorithms",
+        "Computer Organization and Architecture",
+        "Web Development",
+        "Database Management Systems",
+        "Software Engineering Principles",
+        "Operating Systems Fundamentals"
+      ]
+    },
+    "Master of Science": {
+      "School": "Boston University, Boston, MA",
+      "Major": "Computer Science",
+      "Type": "MS",
+      "YearConferred": "May 2025",
+      "Courses": [
+        "Advanced Database Systems",
+        "Algorithmic Analysis and Design",
+        "Advanced Operating Systems",
+        "Programming Language Design",
+        "Advanced Software Engineering",
+        "Security in Software Development",
+        "Machine Learning and Neural Networks"
+      ]
+    }
+  }
+}
