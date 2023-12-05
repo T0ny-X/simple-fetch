@@ -1,6 +1,4 @@
 document.getElementById("fetchButton").addEventListener("click", fetchData);
-document.getElementById("clearButton").addEventListener("click", clearData);
-
 
 function fetchData() {
     const jsonUrl = "https://raw.githubusercontent.com/T0ny-X/simple-fetch/master/data.json";
@@ -65,7 +63,7 @@ function displayError(errorMessage, container = document.getElementById("dataCon
     container.appendChild(errorElement);
 }
 
-function clearData(container = document.getElementById("dataContainer")) {
+function clearData(container = document.getElementById('dataContainer')) {
     // Clear the data container
     container.innerHTML = '';
 }
